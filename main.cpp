@@ -25,9 +25,6 @@ int main() {
     user->appendVideo(new Video(new string ("Blick Blick!"), 20242534, 1647640887, 32104));
     user->appendVideo(new Video(new string ("Uterus May Obey God's word"), 120000, now-3600*48*1000, 2500));
 
-
-
-
     cout << "View Order ";
     cout << "options: 'TIMESTAMP', 'VIEWS', 'COMMENTS', 'DEFAULT'" << endl;
     cout << "Select View order: ";
