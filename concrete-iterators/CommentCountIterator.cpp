@@ -3,8 +3,10 @@
 //
 
 #include "CommentCountIterator.h"
+#include "../sorting-algorithms/quicksort.h"
 
 CommentCountIterator::CommentCountIterator(List<Video *>* videos) {
+    quicksort((Video *) videos->getItemArray(), videos->getCount(), [](Video *video) { return video->getTimestamp(); } );
     this->videos = videos;
 }
 

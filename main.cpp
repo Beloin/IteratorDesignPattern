@@ -12,10 +12,10 @@ int main() {
     long now = chrono::system_clock::now().time_since_epoch().count();
 
     user->appendVideo(new Video(new string ("Allergy in All body"), 120, now, 15));
-    user->appendVideo(new Video(new string ("Uterus May Obey God's word"), 120000, now-3600*48, 2500));
     user->appendVideo(new Video(new string ("Blick Blick!"), 20242534, 1647640887, 32104));
+    user->appendVideo(new Video(new string ("Uterus May Obey God's word"), 120000, now-3600*48, 2500));
 
-    auto iterator = user->getVideoIterator(IteratorType::VIEWS);
+    auto iterator = user->getVideoIterator(IteratorType::COMMENTS);
 
     for (iterator->Fist(); !iterator->IsDone(); iterator->Next()) {
         auto v = iterator->CurrentItem();

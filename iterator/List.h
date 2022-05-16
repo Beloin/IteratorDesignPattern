@@ -16,6 +16,7 @@ public:
     explicit List(long MAX_SIZE);
     virtual long getCount() = 0;
     virtual Item& getItem(long index) = 0;
+    Item *getItemArray() const;
     virtual void appendItem(Item &it) = 0;
 };
 
@@ -23,6 +24,11 @@ template<class Item>
 List<Item>::List(long MAX_SIZE) {
     this->itemArray = new Item[MAX_SIZE];
     count = 0;
+}
+
+template<class Item>
+Item *List<Item>::getItemArray() const {
+    return itemArray;
 }
 
 #endif //ITERATOR_LIST_H

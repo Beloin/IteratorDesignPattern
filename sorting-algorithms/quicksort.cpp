@@ -5,33 +5,33 @@
 #include "quicksort.h"
 
 void quicksort(Video* in, int size, long (*func)(Video*)) {
-
+    quick(in, 0, size, func);
 }
 
-void quick(Video *in, int start, int end) {
+void quick(Video *in, int start, int end, long (*func)(Video*)) {
     if (start < end) {
-        int pivotIndex = partition(in, start, end);
-        quick(in, start, pivotIndex-1);
-        quick(in, pivotIndex + 1, end);
+        int pivotIndex = partition(in, start, end, func);
+        quick(in, start, pivotIndex-1, func);
+        quick(in, pivotIndex + 1, end, func);
     }
 }
 
-void partition(Video *in, int start, int end, ) {
-    Video *pivot = in[start];
+int partition(Video *in, int start, int end, long (*func)(Video*)) {
+    Video *pivot = &in[start];
     int currentIndex = start;
     Video* aux;
     for (int compareIndex = start + 1; compareIndex <= end; compareIndex++) {
-        if (in[compareIndex]->timestamp <= pivot->timestamp) {
+        if (func(&in[compareIndex]) <= func(pivot)) {
             currentIndex += 1;
-            aux = in[currentIndex];
+            aux = &in[currentIndex];
             in[currentIndex] = in[compareIndex];
-            in[compareIndex] = aux;
+            in[compareIndex] = *aux;
         }
     }
 
-    aux = in[currentIndex];
-    in[currentIndex] = in[left];
-    in[left] = aux;
+    aux = &in[currentIndex];
+    in[currentIndex] = in[start];
+    in[start] = *aux;
 
     return currentIndex;
 }
