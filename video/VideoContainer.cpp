@@ -15,16 +15,14 @@ VideoContainer *VideoContainer::DefaultContainer() {
 }
 
 Iterator<Video *> *VideoContainer::createIterator(IteratorType tp) {
-        if (tp != 0) {
-            switch (tp) {
-                case VIEWS:
-                    return new ViewCountIterator(this);
-                case TIMESTAMP:
-                    return new TimestampIterator(this);
-                case COMMENTS:
-                    return new CommentCountIterator(this);
-            }
-        }
+    switch (tp) {
+        case VIEWS:
+            return new ViewCountIterator(this);
+        case TIMESTAMP:
+            return new TimestampIterator(this);
+        case COMMENTS:
+            return new CommentCountIterator(this);
+    }
 
     return new DefaultIterator(this);
 }
@@ -40,5 +38,9 @@ Video *&VideoContainer::getItem(long index) {
 void VideoContainer::appendItem(Video *&it) {
     this->itemArray[count] = it;
     count++;
+}
+
+Video **VideoContainer::getItemArray() const {
+    return this->itemArray;
 }
 

@@ -12,7 +12,6 @@ class TimestampIterator : public Iterator<Video*> {
 private:
     long current = 0;
     List<Video*> *videos;
-
 public:
     explicit TimestampIterator(List<Video*> *);
 

@@ -3,8 +3,15 @@
 //
 
 #include "ViewCountIterator.h"
+#include "../sorting-algorithms/quicksort.h"
 
 ViewCountIterator::ViewCountIterator(List<Video *>* videos) {
+    Video **a = (Video**) malloc(sizeof (Video*) * 3);
+    for (int i = 0; i < videos->getCount(); ++i) {
+        a[i] = videos->getItemArray()[i];
+    }
+    quicksort(a, (int) videos->getCount(), [](Video *v){return v->getViewsCount();});
+    videos->setItemArray(a);
     this->videos = videos;
 }
 

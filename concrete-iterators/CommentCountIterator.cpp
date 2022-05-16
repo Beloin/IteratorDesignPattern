@@ -5,8 +5,14 @@
 #include "CommentCountIterator.h"
 #include "../sorting-algorithms/quicksort.h"
 
+
 CommentCountIterator::CommentCountIterator(List<Video *>* videos) {
-    quicksort((Video *) videos->getItemArray(), videos->getCount(), [](Video *video) { return video->getTimestamp(); } );
+    Video **a = (Video**) malloc(sizeof (Video*) * 3);
+    for (int i = 0; i < videos->getCount(); ++i) {
+        a[i] = videos->getItemArray()[i];
+    }
+    quicksort(a, (int) videos->getCount(), [](Video *v){return v->getCommentsCount();});
+    videos->setItemArray(a);
     this->videos = videos;
 }
 

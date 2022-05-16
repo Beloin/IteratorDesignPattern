@@ -4,11 +4,11 @@
 
 #include "quicksort.h"
 
-void quicksort(Video* in, int size, long (*func)(Video*)) {
+void quicksort(Video** in, int size, long (*func)(Video*)) {
     quick(in, 0, size, func);
 }
 
-void quick(Video *in, int start, int end, long (*func)(Video*)) {
+void quick(Video **in, int start, int end, long (*func)(Video*)) {
     if (start < end) {
         int pivotIndex = partition(in, start, end, func);
         quick(in, start, pivotIndex-1, func);
@@ -16,22 +16,22 @@ void quick(Video *in, int start, int end, long (*func)(Video*)) {
     }
 }
 
-int partition(Video *in, int start, int end, long (*func)(Video*)) {
-    Video *pivot = &in[start];
+int partition(Video **in, int start, int end, long (*func)(Video*)) {
+    Video *pivot = in[start];
     int currentIndex = start;
     Video* aux;
-    for (int compareIndex = start + 1; compareIndex <= end; compareIndex++) {
-        if (func(&in[compareIndex]) <= func(pivot)) {
+    for (int compareIndex = start + 1; compareIndex < end; compareIndex++) {
+        if (func(in[compareIndex]) <= func(pivot)) {
             currentIndex += 1;
-            aux = &in[currentIndex];
+            aux = in[currentIndex];
             in[currentIndex] = in[compareIndex];
-            in[compareIndex] = *aux;
+            in[compareIndex] = aux;
         }
     }
 
-    aux = &in[currentIndex];
+    aux = in[currentIndex];
     in[currentIndex] = in[start];
-    in[start] = *aux;
+    in[start] = aux;
 
     return currentIndex;
 }

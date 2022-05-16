@@ -12,7 +12,8 @@
 enum IteratorType {
     TIMESTAMP,
     VIEWS,
-    COMMENTS
+    COMMENTS,
+    DEFAULT
 };
 
 class VideoContainer : public List<Video*> {
@@ -23,6 +24,7 @@ public:
     Iterator<Video*> *createIterator(IteratorType);
     static VideoContainer *DefaultContainer();
 
+    Video **getItemArray() const override;
     long getCount() override;
     Video *&getItem(long index) override;
     void appendItem(Video *&it) override;
